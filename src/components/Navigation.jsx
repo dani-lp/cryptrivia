@@ -187,7 +187,7 @@ export const navigation = [
   {
     title: "Usa",
     links: [
-      { title: "Shamir's Secret Sharing", href: "/sss" },
+      { title: "Shamir's Secret Sharing", href: "/shamir-secret-sharing" },
       { title: "McEliece Cryptosystem", href: "/mceliece" },
       { title: "Identity-based Cryptography", href: "/identity-based-cryptography" },
     ],
@@ -216,17 +216,14 @@ export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="/">API</TopLevelNavItem>
-        <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-        <TopLevelNavItem href="#">Support</TopLevelNavItem>
         {navigation.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}
             group={group}
-            className={groupIndex === 0 && "md:mt-0"}
+            className={groupIndex === 0 && "mt-0"}
           />
         ))}
-        <li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
+        <li className="sticky bottom-0 z-10 min-[416px]:hidden">
           <Button href="#" variant="filled" className="w-full">
             Sign in
           </Button>

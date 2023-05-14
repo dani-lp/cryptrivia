@@ -187,10 +187,10 @@ function DiscordIcon(props) {
 
 function SocialLink({ href, icon: Icon, children }) {
   return (
-    <Link href={href} className="group">
+    <a href={href} className="group" target="_blank" rel="noreferrer">
       <span className="sr-only">{children}</span>
       <Icon className="h-5 w-5 fill-zinc-700 transition group-hover:fill-zinc-900 dark:group-hover:fill-zinc-500" />
-    </Link>
+    </a>
   );
 }
 
@@ -201,14 +201,8 @@ function SmallPrint() {
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
       <div className="flex gap-4">
-        <SocialLink href="#" icon={TwitterIcon}>
-          Follow us on Twitter
-        </SocialLink>
-        <SocialLink href="#" icon={GitHubIcon}>
+        <SocialLink href="https://github.com/dani-lp/cryptrivia" icon={GitHubIcon}>
           Follow us on GitHub
-        </SocialLink>
-        <SocialLink href="#" icon={DiscordIcon}>
-          Join our Discord server
         </SocialLink>
       </div>
     </div>
@@ -220,7 +214,6 @@ export function Footer() {
 
   return (
     <footer className="mx-auto max-w-2xl space-y-10 pb-16 lg:max-w-5xl">
-      <Feedback key={router.pathname} />
       <PageNavigation />
       <SmallPrint />
     </footer>
