@@ -185,25 +185,29 @@ function NavigationGroup({ group, className }) {
 
 export const navigation = [
   {
-    title: "Guides",
+    title: "Usa",
     links: [
-      { title: "Introduction", href: "/" },
-      { title: "Quickstart", href: "/quickstart" },
-      { title: "SDKs", href: "/sdks" },
-      { title: "Authentication", href: "/authentication" },
-      { title: "Pagination", href: "/pagination" },
-      { title: "Errors", href: "/errors" },
-      { title: "Webhooks", href: "/webhooks" },
+      { title: "Shamir's Secret Sharing", href: "/sss" },
+      { title: "McEliece Cryptosystem", href: "/mceliece" },
+      { title: "Identity-based Cryptography", href: "/identity-based-cryptography" },
     ],
   },
   {
-    title: "Resources",
+    title: "Rompe",
     links: [
-      { title: "Contacts", href: "/contacts" },
-      { title: "Conversations", href: "/conversations" },
-      { title: "Messages", href: "/messages" },
-      { title: "Groups", href: "/groups" },
-      { title: "Attachments", href: "/attachments" },
+      { title: "SHA-1", href: "/sha-1" },
+      { title: "MD5", href: "/md5" },
+      { title: "RSA", href: "/rsa" },
+    ],
+  },
+  {
+    title: "Aprende",
+    links: [
+      { title: "Blakey's Secret Sharing", href: "/bss" },
+      { title: "Rijndael/AES", href: "/aes" },
+      { title: "ECB", href: "/ecb" },
+      { title: "CBC", href: "/cbc" },
+      { title: "CFB", href: "/cfb" },
     ],
   },
 ];
