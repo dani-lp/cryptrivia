@@ -18,6 +18,25 @@ y privadas convencionales.
   ¿Cómo funciona?
 </Heading>
 
+En los sistemas de criptografía asimétrica tradicionales, cada usuario tiene un par de
+claves, una pública y otra privada. La clave pública se puede compartir con cualquiera,
+pero la clave privada debe mantenerse en secreto. Sin embargo, en la criptografía basada
+en identidad, se usa algún tipo de identificador único de la persona, como una dirección
+de correo electrónico o un nombre de usuario, en vez de una clave pública convencional.
+
+En este tipo de sistemas, una entidad externa de confianza, llamada Autoridad de
+Certificación (CA), es la encargada de generar las claves públicas. Veamos un ejemplo:
+supongamos que Alice quiere enviar un mensaje cifrado a Bob, que tiene una dirección de
+correo electrónico. Alice le pide a la CA que genere una clave pública para Bob, en vez de
+usar una tradicional. La CA genera la clave pública y se la envía a Alice, que la utiliza
+para cifrar el mensaje. Cuando Bob recibe el mensaje, utiliza su clave privada para
+descifrarlo.
+
+Sólo la persona con la clave privada correspondiente a la identidad utilizada podrá leer
+el mensaje. Esto significa que, si Alice quiere enviar un mensaje a Bob, sólo necesita
+saber su dirección de correo electrónico. Esto elimina la necesidad de intercambiar claves
+públicas convencionales, y simplifica el proceso de cifrado y descifrado.
+
 ---
 
 <Heading level={2} id="prueba">
