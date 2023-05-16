@@ -10,7 +10,7 @@ import { UsersIcon } from "@/components/icons/UsersIcon";
 
 const resources = [
   {
-    href: "/sss",
+    href: "/shamir-secret-sharing",
     name: "Shamir's Secret Sharing",
     description:
       "Dividir un secreto en partes y distribuirlo entre varios participantes.",
@@ -24,10 +24,10 @@ const resources = [
     },
   },
   {
-    href: "/conversations",
-    name: "Conversations",
+    href: "/mceliece",
+    name: "McEliece Cryptosystem",
     description:
-      "Learn about the conversation model and how to create, retrieve, update, delete, and list conversations.",
+      "Criptografía asimétrica basado en problemas NP-completos.",
     icon: ChatBubbleIcon,
     pattern: {
       y: -6,
@@ -38,10 +38,10 @@ const resources = [
     },
   },
   {
-    href: "/messages",
-    name: "Messages",
+    href: "/sha-1",
+    name: "SHA-1",
     description:
-      "Learn about the message model and how to create, retrieve, update, delete, and list messages.",
+      "Aprende cómo funciona SHA-1 y cuales son sus vulnerabilidades.",
     icon: EnvelopeIcon,
     pattern: {
       y: 32,

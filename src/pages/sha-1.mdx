@@ -1,4 +1,5 @@
 import { Heading } from "@/components/Heading";
+import { ShaFetch } from "@/components/ShaFetch";
 
 export const description =
   "¿Cómo funciona el algoritmo de hashing SHA-1?";
@@ -43,4 +44,18 @@ segura y moderna de SHA-1.
   Ruptura del algoritmo
 </Heading>
 
-¡En proceso!
+SHA-1 tiene dos vulnerabilidades principales. La primera es que al ser un algoritmo
+extremadamente rápido, es más vulnerable a ataques de fuerza bruta que otros algoritmos
+más modernos. La segunda vulnerabilidad es que es posible crear colisiones de forma
+relativamente sencilla.
+
+Un ataque de colisión permite crear dos _input_ con el mismo hash. Esto **no** significa
+que un ataque de este tipo permita obtener los datos originales a partir del hash, o
+alterar un input sin modificar su hash. Este tipo de ataque se conoce como ataque de
+**preimage**, al cual SHA-1 es resistente.
+
+Google publicó en 2017 un ataque de colisión para SHA-1, que consiste en crear dos
+archivos PDF con el mismo hash. Para los detalles técnicos, puedes leer el artículo en
+el que se publicó el ataque: [https://shattered.io/](https://shattered.io/).
+
+{/* <ShaFetch /> */}
