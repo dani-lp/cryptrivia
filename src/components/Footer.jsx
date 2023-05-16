@@ -145,12 +145,12 @@ function PageNavigation() {
     <div className="flex">
       {previousPage && (
         <div className="flex flex-col items-start gap-3">
-          <PageLink label="Previous" page={previousPage} previous />
+          <PageLink label="Anterior" page={previousPage} previous />
         </div>
       )}
       {nextPage && (
         <div className="ml-auto flex flex-col items-end gap-3">
-          <PageLink label="Next" page={nextPage} />
+          <PageLink label="Siguiente" page={nextPage} />
         </div>
       )}
     </div>
@@ -198,7 +198,7 @@ function SmallPrint() {
   return (
     <div className="flex flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-8 dark:border-white/5 sm:flex-row">
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
-        &copy; Copyright {new Date().getFullYear()}. All rights reserved.
+        &copy; Copyright {new Date().getFullYear()}. Todos los derechos reservados.
       </p>
       <div className="flex gap-4">
         <SocialLink href="https://github.com/dani-lp/cryptrivia" icon={GitHubIcon}>
