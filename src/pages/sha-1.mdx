@@ -1,5 +1,5 @@
 import { Heading } from "@/components/Heading";
-import { ShaFetch } from "@/components/ShaFetch";
+import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
 
 export const description =
   "¿Cómo funciona el algoritmo de hashing SHA-1?";
@@ -23,6 +23,8 @@ proteger y asegurar que nadie lo modifica. SHA-1 toma este conjunto de datos com
 y realiza el proceso de hashing sobre él, generando un hash como salida. El hash es una
 secuencia de números y letras que representa una versión codificada del conjunto de datos
 original.
+
+<HashingExampleImages index={0} />
 
 El hash tiene algunas caracterísiticas interesantes. Tiene una longitud fija de 160 bits,
 y es único para cada conjunto de datos. Esto significa que si cambiamos un solo bit del
