@@ -12,7 +12,14 @@ export const sections = [
 # SHA-1
 SHA-1 (o Secure Hash Algorithm 1) es un algoritmo criptográfico que se utiliza para
 convertir datos en un código (en teoría) único y representativo llamado **hash**, de forma
-similar a una huella digital de los datos.
+similar a una huella digital de los datos. {{ className: 'lead' }}
+
+<Note>
+  SHA-1 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en aplicaciones
+  modernas, ya que es vulnerable a ataques de colisión. Esta página se centra en explicar
+  cómo funciona el algoritmo y sus vulnerabilidades. En caso de necesitar una función de
+  hashing moderna, recomendamos usar SHA-256.
+</Note>
 
 <Heading level={2} id="funcionamiento">
   ¿Cómo funciona?

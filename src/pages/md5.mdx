@@ -1,67 +1,75 @@
+import { Link } from "@/components/Link";
+import { Heading } from "@/components/Heading";
+import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
+
 export const description =
-  "In this guide, we will talk about what happens when something goes wrong while you work with the API.";
+  "¿Cómo funciona el algoritmo de hashing MD5?";
 
-# Errors
+export const sections = [
+  { title: "¿Cómo funciona?", id: "funcionamiento" },
+  { title: "Vulnerabilidades", id: "vulnerabilidades" },
+];
 
-In this guide, we will talk about what happens when something goes wrong while you work with the API. Mistakes happen, and mostly they will be yours, not ours. Let's look at some status codes and error types you might encounter. {{ className: 'lead' }}
-
-You can tell if your request was successful by checking the status code when receiving an API response. If a response comes back unsuccessful, you can use the error type and error message to figure out what has gone wrong and do some rudimentary debugging (before contacting support).
+# MD5
+MD5 (o Message-Digest Algorithm 5) es un algoritmo criptográfico que se utiliza para
+convertir datos en un código (en teoría) único y representativo llamado **hash**, de forma
+similar a una huella digital de los datos. {{ className: 'lead' }}
 
 <Note>
-  Before reaching out to support with an error, please be aware that 99% of all
-  reported errors are, in fact, user errors. Therefore, please carefully check
-  your code before contacting Protocol support.
+  MD5 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en aplicaciones
+  modernas, ya que es vulnerable a ataques de colisión. Esta página se centra en explicar
+  cómo funciona el algoritmo y sus vulnerabilidades. En caso de necesitar una función de
+  hashing moderna, recomendamos usar SHA-256.
 </Note>
 
+<Heading level={2} id="funcionamiento">
+  ¿Cómo funciona?
+</Heading>
+
+Al igual que <Link href="/sha-1">SHA-1</Link>, MD5 permite tomar un conjunto de datos, como un
+mensaje, un archivo o incluso una aplicación, y generar una cadena de caracteres única
+que sirve como "huella digital" para ese conjunto de datos, llamada _hash_.
+
+<HashingExampleImages index={0} />
+
+En el caso de MD5, el hash resultante es una cadena de 128 bits de longitud,
+independientemente del tamaño del conjunto de datos original. Si el conjunto de datos
+original es cambiado en cualquier mínima forma, el hash resultante será completamente
+diferente.
+
+El algoritmo MD5 lleva obsoleto más de una década. A finales de 2008, el Instituto de
+Ingeniería de Software de Estados Unidos concluyó que MD5 ya no era seguro para su uso.
+Sin embargo, debido a su amplia adopción previa, sigue siendo un algoritmo de hashing
+muy común en la actualidad. Por ello, is importante conocer sus vulnerabilidades.
+
 ---
 
-## Status codes
+<Heading level={2} id="vulnerabilidades">
+  Vulnerabilidades
+</Heading>
 
-Here is a list of the different categories of status codes returned by the Protocol API. Use these to understand if a request was successful.
+MD5 tiene varias vulnerabilidades clave. La más importante es que es vulnerable a los
+ataques de colisión, lo que significa que es posible encontrar dos conjuntos de datos
+diferentes que produzcan el mismo hash. Este problema es similar a los encontrados en
+<Link href="/sha-1#ruptura">SHA-1</Link>, permitiendo abusar de certificados de seguridad, 
+o Sistemas de Gestión de Contenidos (CMS).
 
-<Properties>
-  <Property name="2xx">
-    A 2xx status code indicates a successful response.
-  </Property>
-  <Property name="4xx">
-    A 4xx status code indicates a client error — this means it's a _you_
-    problem.
-  </Property>
-  <Property name="5xx">
-    A 5xx status code indicates a server error — you won't be seeing these.
-  </Property>
-</Properties>
+Otra vulnerabilidad en común con SHA-1 es que es más vulnerable a los ataques de fuerza
+bruta que algoritmos modernos. Por ejemplo, la antigua GPU NVIDIA GeForce 8800 Ultra,
+sacada al mercado en 2007, puede calcular más de 200 millones de hashes MD5 por segundo.
+Si no hay nada limitando la cantidad de intentos de hash, un atacante puede probar y
+romper el hash MD5 de una contraseña en cuestión de segundos.
 
----
+En específico, los ataques de fuerza bruta usados son los de tipo _"cumpleaños"_, que se
+basan en la paradoja del cumpleaños. Esta paradoja establece que, en un grupo de 23
+personas, hay una probabilidad del `50.7%` de que por lo menos dos personas cumplan años
+el mismo día, mientras que para 57 o más personas la probabilidad es mayor del `99.666%`.
+Aplicado a los ataques de fuerza bruta, esto significa que, si un hash puede producir `H`
+resultados distintos igualmente probables y `H` es lo suficientemente grande, entonces
+al evaluar la función de hashing sobre `1.2 * sqrt(H)` entradas distintas, es fácil que
+encontremos dos entradas que produzcan el mismo hash, provocando una colisión.
 
-## Error types
-
-<Row>
-  <Col>
-
-    Whenever a request is unsuccessful, the Protocol API will return an error response with an error type and message. You can use this information to understand better what has gone wrong and how to fix it. Most of the error messages are pretty helpful and actionable.
-
-    Here is a list of the two error types supported by the Protocol API — use these to understand what you have done wrong.
-
-    <Properties>
-      <Property name="api_error">
-        This means that we made an error, which is highly speculative and unlikely.
-      </Property>
-      <Property name="invalid_request">
-        This means that you made an error, which is much more likely.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col>
-
-    ```bash {{ title: "Error response" }}
-    {
-      "type": "api_error",
-      "message": "No way this is happening!?",
-      "documentation_url": "https://protocol.chat/docs/errors/api_error"
-    }
-    ```
-
-  </Col>
-</Row>
+En la práctica, ha habido varios ataques exitosos de colisión contra MD5. El ejemplo más
+conocido es el malware **Flame**, que se aprovechó de una colisión en MD5 para falsificar
+un certificado de seguridad de Microsoft en 2012, permitiendo que el malware se hiciera
+pasar por una actualización de Windows. ¡Recordad no utilizar este algoritmo!
