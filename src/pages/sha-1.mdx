@@ -56,6 +56,40 @@ alterar un input sin modificar su hash. Este tipo de ataque se conoce como ataqu
 
 Google publicó en 2017 un ataque de colisión para SHA-1, que consiste en crear dos
 archivos PDF con el mismo hash. Para los detalles técnicos, puedes leer el artículo en
-el que se publicó el ataque: [https://shattered.io/](https://shattered.io/).
+el que se publicó el ataque: 
+<a href="https://shattered.io/static/shattered.pdf" target="_blank">"The first collision for full SHA-1"</a>
 
-{/* <ShaFetch /> */}
+El proceso de ruptura es el siguiente:
+
+1. Se eligen cuidadosamente dos archivos PDF diferentes con estructuras y contenidos
+similares pero nombres y datos diferentes.
+2. Se generan colisiones, utilizando una técnica llamada "ataque de colisión de prefijo
+elegido". Consiste en manipular los archivos PDF añadiendo estructuras de datos
+específicas que hacen que los dos archivos tengan el mismo hash SHA-1. Las estructuras
+añadidas aprovechan debilidades en el algoritmo SHA-1.
+3. Se verifica el ataque, creando un certificado digital utilizando uno de los archivos
+PDF. Este certificado es una forma de demostrar que el archivo es legítimo y no ha sido
+manipulado. Mediante el uso de la técnica de colisión, se logra aplicar el mismo
+certificado al otro archivo PDF sin generar advertencias o errores, ya que ambos tienen
+el mismo hash SHA-1.
+4. Se utiliza el PDF falso para crear un archivo malicioso que aparenta ser inofensivo,
+pero tiene el mismo hash que un archivo legítimo. Esta técnica permite engañar a usuarios
+para que abran un archivo malicioso pensando que es seguro.
+
+### Consideraciones
+Desgraciadamente, no podemos replicar el ataque de colisión de Google en esta página, ya
+que requiere de un gran poder de cómputo y de una gran cantidad de tiempo (¡el ataque
+original necesitó computar `9,223,372,036,854,775,808` hashes, necesitando el equivalente
+a 110 años de computación por GPU!). El [artículo publicado por Google](https://shattered.io/)
+contiene una herramienta para comprobar si un fichero PDF es vulnerable a este ataque.
+
+En comparación a un ataque de fuerza bruta, que consiste en probar todas las combinaciones
+posibles de datos hasta encontrar una que coincida con el hash, un ataque de colisión
+de este tipo es alrededor de 100.000 veces más rápido, ¡que necesitaría `12.000.000` años
+de computación por GPU!
+
+Aunque el ejemplo de colisión está hecho con ficheros PDF, el ataque es aplicable a otros
+tipos de ficheros o aplicaciones; cualquier aplicación que dependa de SHA-1 para sus
+firmas digitales, comprobación de integridad o identificación de ficheros es
+potencialmente vulnerable. SHA-1 dejó de utilizarse hace años en navegadores y muchas
+herramientas, pero sigue siendo utilizado en muchos sistemas y aplicaciones antiguos.

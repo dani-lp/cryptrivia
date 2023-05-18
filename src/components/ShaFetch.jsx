@@ -9,5 +9,5 @@ export const ShaFetch = () => {
       .then((data) => setData(data));
   }, []);
 
-  return <div>{data}</div>;
+  return <div>{JSON.stringify(data)}</div>;
 };
