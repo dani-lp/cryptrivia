@@ -189,7 +189,6 @@ export const navigation = [
     links: [
       { title: "Shamir's Secret Sharing", href: "/shamir-secret-sharing" },
       { title: "McEliece Cryptosystem", href: "/mceliece" },
-      { title: "Identity-based Cryptography", href: "/identity-based-cryptography" },
     ],
   },
   {
@@ -203,6 +202,7 @@ export const navigation = [
   {
     title: "Aprende",
     links: [
+      { title: "Identity-based Cryptography", href: "/identity-based-cryptography" },
       { title: "Blakey's Secret Sharing", href: "/bss" },
       { title: "Rijndael/AES", href: "/aes" },
       { title: "ECB", href: "/ecb" },
