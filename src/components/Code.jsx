@@ -121,10 +121,6 @@ function CodePanel({ tag, label, code, children }) {
 
   return (
     <div className="group dark:bg-white/2.5">
-      <CodePanelHeader
-        tag={child.props.tag ?? tag}
-        label={child.props.label ?? label}
-      />
       <div className="relative">
         <pre className="overflow-x-auto p-4 text-xs text-white">{children}</pre>
         <CopyButton code={child.props.code ?? code} />

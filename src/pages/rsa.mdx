@@ -1,445 +1,122 @@
+import { Heading } from "@/components/Heading";
+
 export const description =
-  "On this page, we’ll dive into the different group endpoints you can use to manage groups programmatically.";
+  "¿Cómo funciona el algoritmo de hashing SHA-1?";
 
-# Groups
+export const sections = [
+  { title: "¿Cómo funciona?", id: "funcionamiento" },
+  { title: "Ruptura del algoritmo", id: "ruptura" },
+];
 
-Groups are where communities live in Protocol — they are a collection of contacts you're talking to all at once. On this page, we'll dive into the different group endpoints you can use to manage groups programmatically. We'll look at how to query, create, update, and delete groups. {{ className: 'lead' }}
+# RSA
+RSA es uno de los algoritmos de criptografía asimétrica más utilizados en la actualidad.
+Permite la creación de claves públicas y privadas, que se utilizan para cifrar y descifrar
+información. {{ className: 'lead' }}
 
-## The group model
+<Heading level={2} id="funcionamiento">
+  ¿Cómo funciona?
+</Heading>
 
-The group model contains all the information about your groups, including what contacts are in the group and the group's name, description, and avatar.
+Como muchos algoritmos de criptografía asimétrica, el proceso de uso de RSA se puede
+dividir en cuatro pasos principales:
 
-### Properties
+1. Generación de claves
+2. Distribución de claves
+3. Encriptado de información
+4. Desencriptado de información
 
-<Properties>
-  <Property name="id" type="string">
-    Unique identifier for the group.
-  </Property>
-  <Property name="name" type="string">
-    The name for the group.
-  </Property>
-  <Property name="description" type="string">
-    The description for the group.
-  </Property>
-  <Property name="avatar_url" type="string">
-    The avatar image URL for the group.
-  </Property>
-  <Property name="conversation_id" type="string">
-    Unique identifier for the conversation that belongs to the group.
-  </Property>
-  <Property name="contacts" type="array">
-    An array of contact objects that are members of the group.
-  </Property>
-  <Property name="created_at" type="timestamp">
-    Timestamp of when the group was created.
-  </Property>
-  <Property name="archived_at" type="timestamp">
-    Timestamp of when the group was archived.
-  </Property>
-</Properties>
+### Generación de claves
 
----
+En esta sección vamos a ver cómo se realiza la generación de las claves. Primero, debemos
+elegir dos números primos grandes aleatorios, que llamaremos `p` y `q`. Ambos números
+deben ser secretos. Luego, calculamos el producto de ambos números, que llamaremos
+`n = pq`. `n` será el módulo de las claves públicas y privadas, y publicado como parte de
+nuestra clave pública.
 
-## List all groups {{ tag: 'GET', label: '/v1/groups' }}
+A continuación, computamos `λ(n)`, donde `λ` es la función de Carmichael. Esta función, de
+forma resumida, calcula el mínimo común múltiplo de varios números de forma eficiente. El
+resultado de esta operación debe ser secreto también. Después, elegiremos un número entero
+llamado `e`; este número debe ser menor que `λ(n)` y mayor que `2`, además de ser coprimo
+con `λ(n)`. `e` será parte de nuestra clave pública.
 
-<Row>
-  <Col>
+Finalmente calculamos `d`, que es el inverso multiplicativo de `e` módulo `λ(n)` (es
+decir, `d=e⁻¹ mod λ(n)`). `d` será parte de nuestra clave privada. Por lo tanto, nuestra
+clave pública será la tupla `(n, e)` y nuestra clave privada (y secreta) será `d`. Los
+valores de `p`, `q` y `λ(n)` deben ser descartados, ya que pueden ser usados para calcular
+`d` fácilmente.
 
-    This endpoint allows you to retrieve a paginated list of all your groups. By default, a maximum of ten groups are shown per page.
+### Distribución de claves, encriptación y desencriptación
+La distribución es muy simple: basta con publicar la clave pública `(n, e)` en algún lugar
+público. Cualquiera que quiera enviarnos un mensaje puede utilizar esta clave para
+encriptarlo.
 
-    ### Optional attributes
+Imaginemos que Alice quiere mandar un mensaje `M` a Bob. Una vez que Alice tiene la clave
+pública de Bob, puede transformar el mensaje `M` en un número `m` tal que `m < n`. Después
+puede computar `c = mᵉ mod n` y enviar `c` a Bob. Bob puede desencriptar el mensaje usando
+su clave privada `d`, de forma que `cᵈ mod n = m`. En la práctica, Bob y Alice pueden usar
+programas para realizar estas operaciones de forma rápida y sencilla.
 
-    <Properties>
-      <Property name="limit" type="integer">
-        Limit the number of groups returned.
-      </Property>
-      <Property name="archived" type="boolean">
-        Only show groups that are archived when set to `true`.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="GET" label="/v1/groups">
-
-    ```bash {{ title: 'cURL' }}
-    curl -G https://api.protocol.chat/v1/groups \
-      -H "Authorization: Bearer {token}" \
-      -d limit=10
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.list()
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.list()
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->list();
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "has_more": false,
-      "data": [
-        {
-          "id": "l7cGNIBKZiNJ6wqF",
-          "name": "Plaza Hotel",
-          "description": "World-renowned.",
-          "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-          "conversation_id": "ZYjVAbCE9g5XRlra",
-          "contacts": [
-            {
-              "username": "Hector"
-              // ...
-            },
-            {
-              "username": "Cedric"
-              // ...
-            },
-            {
-              "username": "Hester"
-              // ...
-            },
-            {
-              "username": "Cliff"
-              // ...
-            }
-          ],
-          "created_at": 692233200,
-          "archived_at": null
-        },
-        {
-          "id": "hSIhXBhNe8X1d8Et"
-          // ...
-        }
-      ]
-    }
-    ```
-
-  </Col>
-</Row>
+La magia de la criptografía asimétrica reside en la doble función de las claves. Por un
+lado, nuestra clave privada nos permite encriptar mensajes, de forma que alguien con
+nuestra clave pública puede asegurarse de que el mensaje ha sido enviado por nosotros. Por
+otro lado, al usar la clave pública de el receptor de nuestro mensaje, nos aseguramos
+también de que sólo él puede leerlo, al desencriptarlo con su clave privada. Interesante,
+¿verdad?
 
 ---
 
-## Create a group {{ tag: 'POST', label: '/v1/groups' }}
+<Heading level={2} id="ruptura">
+  Ruptura del algoritmo
+</Heading>
+
+Vamos a ver un ejemplo donde los números primos utilizados para generar las claves son
+muy (relativamente) pequeños, para poder ver cómo se rompe el algoritmo. Los valores con
+los que vamos a trabajar son los siguientes:
+
+<div className="whitespace-normal break-words">
+- `c = 964354128913912393938480857590969826308054462950561875638492039363373779803642185`
+- `n = 1584586296183412107468474423529992275940096154074798537916936609523894209759157543`
+- `e = 65537`
+</div>
+
+En este caso, `n` y `e` son la clave pública, y `c` es el mensaje encriptado. Sabemos que
+`n` es el producto de dos números primos, pero no sabemos cuáles son. Para romper el
+necesitamos descubrir el valor de ambos números. Como `n` es muy pequeño en este ejemplo
+(no lo parece, ¿verdad?) podemos usar herramientas para encontrar los factores de `n` de
+forma rápida.
+
+En este caso, para evitar llevar a cabo la computación de forma manual, vamos a usar la
+plataforma <a href="https://factordb.com/" target="_blank">factordb.com</a>. Esta
+plataforma nos permite introducir un número y nos devuelve sus factores primos. En este
+caso, los factores de `n` son:
+
+<div className="whitespace-normal break-words">
+- `p = 2434792384523484381583634042478415057961`
+- `q = 650809615742055581459820253356987396346063`
+</div>
+
+Debemos también calcular el valor de `λ(n)`, que en este caso es `λ(n) = (p-1) * (q-1)`,
+además de `d`. Todo este proceso es fácil de hacer con un lenguaje de programación, como
+podemos ver a continuación.
+
+<CodeGroup title="" tag="GET" label="/v1/messages">
+  ```python {{ title: 'Python' }}
+  # para usar esta librería, instalarla con 'pip install pycryptodome'
+  from Crypto.Util.number import inverse, long_to_bytes
+
+  c = 843044897663847841476319711639772861390329326681532977209935413827620909782846667
+  n = 1422450808944701344261903748621562998784243662042303391362692043823716783771691667
+  e = 65537
+  p = 2159947535959146091116171018558446546179
+  q = 658558036833541874645521278345168572231473
+
+  phi = (p-1)*(q-1)
+
+  d = inverse(e, phi)
+
+  m = pow(c,d,n)
+
+  print(long_to_bytes(m))
+  ```
+</CodeGroup>
 
-<Row>
-  <Col>
-
-    This endpoint allows you to create a new group conversation between you and a group of your Protocol contacts.
-
-    ### Required attributes
-
-    <Properties>
-      <Property name="name" type="string">
-        The name for the group.
-      </Property>
-    </Properties>
-
-    ### Optional attributes
-
-    <Properties>
-      <Property name="description" type="string">
-        The description for the group.
-      </Property>
-      <Property name="avatar_url" type="string">
-        The avatar image URL for the group.
-      </Property>
-      <Property name="contacts" type="array">
-        An array of contact objects that are members of the group.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="POST" label="/v1/groups">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/groups \
-      -H "Authorization: Bearer {token}" \
-      -d name="Plaza Hotel"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.create({
-      name: 'Plaza Hotel',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.create(name="Plaza Hotel")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->create([
-      'name' => 'Plaza Hotel',
-    ]);
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": null,
-      "avatar_url": null,
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [],
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Retrieve a group {{ tag: 'GET', label: '/v1/groups/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to retrieve a group by providing the group id. Refer to [the list](#the-group-model) at the top of this page to see which properties are included with group objects.
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="GET" label="/v1/groups/L7cGNIBKZiNJ6wqF">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.get('L7cGNIBKZiNJ6wqF')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.get("L7cGNIBKZiNJ6wqF")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->get('L7cGNIBKZiNJ6wqF');
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": "World-renowned.",
-      "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [
-        {
-          "username": "Hector"
-          // ...
-        },
-        {
-          "username": "Cedric"
-          // ...
-        },
-        {
-          "username": "Hester"
-          // ...
-        },
-        {
-          "username": "Cliff"
-          // ...
-        }
-      ],
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Update a group {{ tag: 'PUT', label: '/v1/groups/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to perform an update on a group. Examples of updates are changing the name, description, and avatar or adding and removing contacts from the group.
-
-    ### Optional attributes
-
-    <Properties>
-      <Property name="name" type="string">
-        The new name for the group.
-      </Property>
-      <Property name="description" type="string">
-        The new description for the group.
-      </Property>
-      <Property name="avatar_url" type="string">
-        The new avatar image URL for the group.
-      </Property>
-      <Property name="contacts" type="array">
-        An array of contact objects that are members of the group.
-      </Property>
-      <Property name="archived_at" type="timestamp">
-        Timestamp of when the group was archived.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="PUT" label="/v1/groups/L7cGNIBKZiNJ6wqF">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X PUT https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}" \
-      -d description="The finest in New York."
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.update('L7cGNIBKZiNJ6wqF', {
-        description: 'The finest in New York.',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.update("L7cGNIBKZiNJ6wqF", description="The finest in New York.")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->update('L7cGNIBKZiNJ6wqF', [
-      'description' => 'The finest in New York.',
-    ]);
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": "The finest in New York.",
-      "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [
-        {
-          "username": "Hector"
-          // ...
-        },
-        {
-          "username": "Cedric"
-          // ...
-        },
-        {
-          "username": "Hester"
-          // ...
-        },
-        {
-          "username": "Cliff"
-          // ...
-        }
-      ],
-      "created_at": 692233200,
-      "archived_at": null
-    },
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Delete a group {{ tag: 'DELETE', label: '/v1/groups/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to delete groups. Note: This will permanently delete the group, including the messages — archive it instead if you want to be able to restore it later.
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="DELETE" label="/v1/groups/L7cGNIBKZiNJ6wqF">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.delete('L7cGNIBKZiNJ6wqF')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.delete("L7cGNIBKZiNJ6wqF")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->delete('L7cGNIBKZiNJ6wqF');
-    ```
-
-    </CodeGroup>
-
-  </Col>
-</Row>
