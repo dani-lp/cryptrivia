@@ -19,7 +19,7 @@ export function CopyButton({ code }) {
     <button
       type="button"
       className={clsx(
-        "group/button right-4 top-3.5 overflow-hidden rounded-full py-1 pl-2 pr-3 text-2xs font-medium border border-gray-300 backdrop-blur transition",
+        "group/button right-4 top-3.5 overflow-hidden rounded-full border border-gray-300 py-1 pl-2 pr-3 text-2xs font-medium backdrop-blur transition",
         copied
           ? "bg-emerald-400/10 ring-1 ring-inset ring-emerald-400/20"
           : "bg-white/5 hover:bg-white/7.5 dark:bg-white/2.5 dark:hover:bg-white/5"
@@ -33,11 +33,11 @@ export function CopyButton({ code }) {
       <span
         aria-hidden={copied}
         className={clsx(
-          "pointer-events-none flex items-center gap-0.5 text-zinc-600 transition duration-300",
+          "pointer-events-none flex items-center gap-0.5 text-zinc-600 transition duration-300 dark:text-zinc-300",
           copied && "-translate-y-1.5 opacity-0"
         )}
       >
-        <ClipboardIcon className="h-5 w-5 fill-zinc-500/60 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400" />
+        <ClipboardIcon className="h-5 w-5 fill-zinc-500/60 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400 dark:stroke-zinc-200" />
         Copiar
       </span>
       <span
