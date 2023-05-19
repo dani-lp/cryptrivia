@@ -37,6 +37,7 @@ export function Button({
 
   className = clsx(
     "inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition",
+    "disabled:opacity-50 disabled:cursor-not-allowed",
     variantStyles[variant],
     className
   );

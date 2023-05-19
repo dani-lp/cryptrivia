@@ -9,6 +9,7 @@ export const SelectField = ({
   setSelected,
   values,
   className,
+  disabled,
 }) => {
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -23,6 +24,7 @@ export const SelectField = ({
                 "relative w-full cursor-default rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:text-sm sm:leading-6",
                 className
               )}
+              disabled={disabled}
             >
               <span className="block truncate">{selected.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
