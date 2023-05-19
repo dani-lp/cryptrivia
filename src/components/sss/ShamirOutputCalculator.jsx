@@ -4,7 +4,6 @@ import { Spinner } from "@/components/Spinner";
 import { TextAreaField } from "@/components/TextAreaField";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const MAX_SECRET_LENGTH = 100;
 
 export const ShamirOutputCalculator = () => {
   const [loading, setLoading] = React.useState(false);
