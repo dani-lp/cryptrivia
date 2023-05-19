@@ -83,7 +83,8 @@ export const ShamirOutputCalculator = () => {
             <div className="mb-4 flex items-center justify-center">
               <span className="mr-2">
                 Ha habido un error... Asegúrate de que el formato de las
-                coordenadas es correcto.
+                coordenadas es correcto, y de que estás usando el número mínimo
+                de coordenadas necesarias para reconstruir el secreto.
               </span>
             </div>
           )}

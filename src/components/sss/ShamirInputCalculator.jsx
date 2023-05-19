@@ -67,9 +67,9 @@ export const ShamirInputCalculator = () => {
   const stringShares = shares.map((share) => share.join(",")).join(";");
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-700">
+    <div className="relative rounded-lg border border-gray-200 dark:border-zinc-700">
       {loading && (
-        <div className="absolute z-40 flex h-full w-full items-center justify-center bg-white bg-opacity-80 dark:bg-zinc-800/80">
+        <div className="absolute z-40 flex h-full w-full items-center justify-center rounded-lg bg-white bg-opacity-80 dark:bg-zinc-800/80">
           <Spinner size="lg" />
         </div>
       )}
