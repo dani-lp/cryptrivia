@@ -1,10 +1,12 @@
 import { Heading } from "@/components/Heading";
+import { RSAKeyGen } from "@/components/RSAKeyGen";
 
 export const description =
   "¿Cómo funciona el algoritmo de hashing SHA-1?";
 
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
+  { title: "Genera tus claves", id: "genera" },
   { title: "Ruptura del algoritmo", id: "ruptura" },
 ];
 
@@ -65,6 +67,29 @@ también de que sólo él puede leerlo, al desencriptarlo con su clave privada. 
 
 ---
 
+<Heading level={2} id="genera">
+  Genera tus claves
+</Heading>
+
+A continuación podrás generar tus propias claves RSA.
+
+<RSAKeyGen />
+
+También puedes usar herramientas nativas de tu sistema operativo para generar las claves.
+Por ejemplo, podemos ver cómo generar las claves en Linux usando el comando `openssl`:
+
+<CodeGroup>
+  ```bash {{ title: 'Bash' }}
+  # Generamos la clave privada
+  openssl genrsa -out private.pem 2048
+
+  # Generamos la clave pública, en base a la clave privada ya generada
+  openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+  ```
+</CodeGroup>
+
+---
+
 <Heading level={2} id="ruptura">
   Ruptura del algoritmo
 </Heading>
@@ -97,7 +122,7 @@ caso, los factores de `n` son:
 
 Debemos también calcular el valor de `λ(n)`, que en este caso es `λ(n) = (p-1) * (q-1)`,
 además de `d`. Todo este proceso es fácil de hacer con un lenguaje de programación, como
-podemos ver a continuación.
+podemos ver a continuación, donde usamos Python:
 
 <CodeGroup title="" tag="GET" label="/v1/messages">
   ```python {{ title: 'Python' }}
