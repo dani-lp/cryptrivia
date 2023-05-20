@@ -1,5 +1,6 @@
 import { Heading } from "@/components/Heading";
 import { KeyGen } from "@/components/mceliece/KeyGen";
+import { Questions } from "@/components/mceliece/Questions";
 
 export const description =
   "En esta página, veremos cómo funciona el algoritmo de cifrado 'McEliece cryptosystem'.";
@@ -7,6 +8,7 @@ export const description =
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
   { title: "Prueba el algoritmo", id: "prueba" },
+  { title: "Revisa tu aprendizaje", id: "revisa" },
 ];
 
 # McEliece Cryptosystem
@@ -198,3 +200,13 @@ ver el resultado, que será comprimido para evitar que tu navegador se bloquee a
 el resultado.
 
 <KeyGen />
+
+--- 
+
+<Heading level={2} id="revisa">
+  Revisa tu aprendizaje
+</Heading>
+
+¡Prueba tus conocimientos con estas preguntas de test!
+
+<Questions />

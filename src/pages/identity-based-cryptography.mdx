@@ -1,7 +1,13 @@
 import { Heading } from "@/components/Heading";
+import { Questions } from "@/components/ibc/Questions";
 
 export const description =
   "En esta página, veremos cómo funcionan los algoritmos de cifrado basados en identidad.";
+  
+export const sections = [
+  { title: "¿Cómo funciona?", id: "funcionamiento" },
+  { title: "Revisa tu aprendizaje", id: "revisa" },
+];
 
 # Identity-based cryptography 
 
@@ -9,7 +15,9 @@ La criptografía basada en identidad es una forma de cifrar y proteger la inform
 se basa en la identidad de una persona o entidad, en lugar de utilizar las claves públicas
 y privadas convencionales. {{ className: 'lead' }}
 
-## ¿Cómo funciona?
+<Heading level={2} id="funcionamiento">
+  ¿Cómo funciona?
+</Heading>
 
 En los sistemas de criptografía asimétrica tradicionales, cada usuario tiene un par de
 claves, una pública y otra privada. La clave pública se puede compartir con cualquiera,
@@ -29,3 +37,13 @@ Sólo la persona con la clave privada correspondiente a la identidad utilizada p
 el mensaje. Esto significa que, si Alice quiere enviar un mensaje a Bob, sólo necesita
 saber su dirección de correo electrónico. Esto elimina la necesidad de intercambiar claves
 públicas convencionales, y simplifica el proceso de cifrado y descifrado.
+
+--- 
+
+<Heading level={2} id="revisa">
+  Revisa tu aprendizaje
+</Heading>
+
+¡Prueba tus conocimientos con estas preguntas de test!
+
+<Questions />
