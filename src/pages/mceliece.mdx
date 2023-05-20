@@ -1,4 +1,5 @@
 import { Heading } from "@/components/Heading";
+import { KeyGen } from "@/components/mceliece/KeyGen";
 
 export const description =
   "En esta página, veremos cómo funciona el algoritmo de cifrado 'McEliece cryptosystem'.";
@@ -90,4 +91,110 @@ en la siguiente sección.
   Prueba el algoritmo
 </Heading>
 
-¡En proceso!
+Para el ejemplo de uso, vamos a ver cómo se puede utilizar el algoritmo McEliece para
+generar un secreto compartido para Alice y Bob. Podrán utilizar este secreto para
+comunicarse de forma segura.
+
+Para ello, vamos a ver dos ejemplos de código: uno en Rust y otro en TypeScript. En el
+caso de Rust, utilizaremos la librería `classic-mceliece-rust`, y en el caso de TypeScript
+utilizaremos la librería `mceliece`. Éstas librerías pueden ser instaladas con los
+comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivamente.
+
+<Note>
+  Nota: para poder usar la versión de Rust, la librería `rand` debe estar instalada.
+</Note>
+
+<Row className="mb-16">
+  <Col>
+    ### 1.- Alice genera las claves pública y privadas
+
+    Alice genera una clave pública y una clave privada. La clave privada tendrá que
+    guardarla a buen recaudo, pero la calve pública la puede compartir con Bob. {{ className: 'lead'}}
+  </Col>
+
+  <Col>
+    <CodeGroup title="Generación de claves pública y privada" tag="GET" label="/v1/messages">
+
+    ```rust
+    // Generación de claves probabilística
+    let mut rng = rand::thread_rng(); // número aleatorio
+    let (public_key, secret_key) = keypair_boxed(&mut rng); 
+    ```
+
+    ```typescript
+    // Generación de claves probabilística
+    const { public_key, private_key } = await mceliece.keyPair();
+    ```
+
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+<Row className="mb-16" inverse>
+  <Col>
+    ### 2.- Bob computa una clave secreta y compartida
+
+    Una vez Bob recibe la clave pública de Alice, puede computar una clave secreta. A su
+    vez, también computará un _ciphertext_ o texto cifrado que podrá enviar a Alice, para
+    que ella pueda generar su propio secreto sin necesidad de enviarlo por la red. {{ className: 'lead'}}
+  </Col>
+
+  <Col>
+    <CodeGroup title="Generación de secreto para Bob" tag="GET" label="/v1/messages">
+
+    ```rust
+    // Generación de secreto probabilístico
+    let (ciphertext, secret_bob) = encapsulate_boxed(&public_key, &mut rng);
+    ```
+
+    ```typescript
+    // Generación de secreto probabilístico
+    const { cyphertext, secret: secret_bob } = await mceliece.encrypt(public_key);
+    ```
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+<Row className="mb-16">
+  <Col>
+    ### 3.- Alice recrea la clave secreta
+
+    Una vez Alice recibe el _ciphertext_ de Bob, puede recrear el secreto que Bo ha
+    computado. Para ello, utiliza su clave privada y el _ciphertext_ de Bob. Esto es 
+    posible gracias a que la clave privada inicial de Alice ha sido usada para generar la
+    clave pública, que a su vez ha sido usada para generar el secreto compartido. {{ className: 'lead'}}
+  
+  </Col>
+
+  <Col>
+    <CodeGroup title="Generación de secreto para Alice" tag="GET" label="/v1/messages">
+
+    ```rust
+    // Generación de secreto determinística
+    let secret_alice = decapsulate_boxed(&ciphertext, &secret_key);
+
+    ```
+
+    ```typescript
+    // Generación de secreto determinística
+    const secret_alice = await mceliece.decrypt(cyphertext, private_key);
+    ```
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+### Ejecución: ¡bajo tu propia responsabilidad! {{ anchor: false }}
+
+El tiempo de ejecución de este algoritmo es muy lento. Puedes realizar una prueba bajo tu
+propia responsabilidad, pero ten en cuenta que tu navegador puede bloquearse durante unos
+segundos.
+
+Además, como las claves públicas y privadas generadas en el primer paso son **enormes**,
+no las mostraremos aquí. Si quieres verlas, puedes abrir la consola de tu navegador y
+ver el resultado, que será comprimido para evitar que tu navegador se bloquee al mostrar
+el resultado.
+
+<KeyGen />

@@ -2,6 +2,7 @@ import Link from "next/link";
 import clsx from "clsx";
 
 import { Heading } from "@/components/Heading";
+import { classNames } from "@/utils";
 
 export const a = Link;
 export { Button } from "@/components/Button";
@@ -38,9 +39,14 @@ export function Note({ children }) {
   );
 }
 
-export function Row({ children }) {
+export function Row({ children, className, inverse }) {
   return (
-    <div className="grid grid-cols-1 items-start gap-x-16 gap-y-10 xl:max-w-none xl:grid-cols-2">
+    <div
+      className={classNames(
+        "grid grid-cols-1 items-start gap-x-16 gap-y-10 xl:max-w-none xl:grid-cols-2",
+        className
+      )}
+    >
       {children}
     </div>
   );

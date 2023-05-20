@@ -10,7 +10,7 @@ export const RSAKeyGen = () => {
 
   const generateKeypair = React.useCallback(async () => {
     return new Promise((resolve, reject) => {
-      const pair = keypair();
+      const pair = keypair({ bits: 512 });
       resolve(pair);
 
       if (pair.publicKey === null || pair.privateKey === null) {
@@ -21,6 +21,9 @@ export const RSAKeyGen = () => {
 
   const handleGenerateKeypair = React.useCallback(async () => {
     setLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
     try {
       const pair = await generateKeypair();
       setPublicKey(pair.public);
