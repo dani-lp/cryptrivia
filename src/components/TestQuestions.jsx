@@ -8,7 +8,7 @@ const Answers = ({ answers, selected, setSelected }) => {
   return (
     <RadioGroup value={selected} onChange={setSelected}>
       <RadioGroup.Label className="sr-only">Privacy setting</RadioGroup.Label>
-      <div className="-space-y-px rounded-md bg-white">
+      <div className="-space-y-px rounded-md dark:text-white">
         {Object.values(answers).map((answer, answerIdx) => (
           <RadioGroup.Option
             key={answer}
@@ -20,7 +20,7 @@ const Answers = ({ answers, selected, setSelected }) => {
                   ? "rounded-bl-md rounded-br-md"
                   : "",
                 checked
-                  ? "z-10 border-emerald-200 bg-emerald-50"
+                  ? "z-10 border-emerald-200 bg-emerald-50 dark:bg-emerald-900"
                   : "border-gray-200",
                 "relative flex cursor-pointer border p-4 focus:outline-none"
               )
@@ -44,7 +44,7 @@ const Answers = ({ answers, selected, setSelected }) => {
                   <RadioGroup.Label
                     as="span"
                     className={classNames(
-                      checked ? "text-emerald-900" : "text-gray-900",
+                      checked ? "text-emerald-900 dark:text-emerald-200" : "text-gray-900 dark:text-white",
                       "block text-sm font-medium"
                     )}
                   >

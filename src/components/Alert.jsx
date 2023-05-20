@@ -47,7 +47,7 @@ export const Alert = ({ content, shown, className }) => {
       );
     case "error":
       return (
-        <div className={classNames("rounded-md bg-red-50 p-4", className)}>
+        <div className={classNames("rounded-md bg-red-50 dark:bg-red-950 p-4", className)}>
           <div className="flex">
             <div className="shrink-0">
               <XCircleIcon
@@ -56,7 +56,7 @@ export const Alert = ({ content, shown, className }) => {
               />
             </div>
             <div className="ml-3">
-              <h4 className="text-sm font-medium text-red-800">
+              <h4 className="text-sm font-medium text-red-800 dark:text-red-200">
                 {content.title}
               </h4>
               {content.errors.length > 0 && (
@@ -74,7 +74,7 @@ export const Alert = ({ content, shown, className }) => {
       );
     case "success":
       return (
-        <div className={classNames("rounded-md bg-green-50 p-4", className)}>
+        <div className={classNames("rounded-md bg-emerald-50 dark:bg-emerald-950 p-4", className)}>
           <div className="flex">
             <div className="shrink-0">
               <CheckCircleIcon
@@ -83,11 +83,11 @@ export const Alert = ({ content, shown, className }) => {
               />
             </div>
             <div className="ml-3">
-              <h4 className="text-sm font-medium text-green-800">
+              <h4 className="text-sm font-medium text-emerald-800 dark:text-emerald-200">
                 {content.title}
               </h4>
               {content.message && (
-                <div className="mt-2 text-sm text-green-700">
+                <div className="mt-2 text-sm text-emerald-700 dark:text-emerald-200">
                   <p>{content.message}</p>
                 </div>
               )}
