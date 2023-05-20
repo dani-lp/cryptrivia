@@ -5,8 +5,8 @@ import { GridPattern } from "@/components/GridPattern";
 import { Heading } from "@/components/Heading";
 import { ChatBubbleIcon } from "@/components/icons/ChatBubbleIcon";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
-import { UserIcon } from "@/components/icons/UserIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
+import { ArrowsRightLeftIcon, HashtagIcon, KeyIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
 const resources = [
   {
@@ -14,7 +14,7 @@ const resources = [
     name: "Shamir's Secret Sharing",
     description:
       "Dividir un secreto en partes y distribuirlo entre varios participantes.",
-    icon: UserIcon,
+    icon: UserGroupIcon,
     pattern: {
       y: 16,
       squares: [
@@ -26,9 +26,8 @@ const resources = [
   {
     href: "/mceliece",
     name: "McEliece Cryptosystem",
-    description:
-      "Criptografía asimétrica basado en problemas NP-completos.",
-    icon: ChatBubbleIcon,
+    description: "Criptografía asimétrica basado en problemas NP-completos.",
+    icon: ArrowsRightLeftIcon,
     pattern: {
       y: -6,
       squares: [
@@ -42,7 +41,7 @@ const resources = [
     name: "SHA-1",
     description:
       "Aprende cómo funciona SHA-1 y cuales son sus vulnerabilidades.",
-    icon: EnvelopeIcon,
+    icon: HashtagIcon,
     pattern: {
       y: 32,
       squares: [
@@ -52,11 +51,11 @@ const resources = [
     },
   },
   {
-    href: "/groups",
-    name: "Groups",
+    href: "/rsa",
+    name: "RSA",
     description:
-      "Learn about the group model and how to create, retrieve, update, delete, and list groups.",
-    icon: UsersIcon,
+      "Aprende qué es RSA, cómo se puede romper y crea tus propias claves.",
+    icon: KeyIcon,
     pattern: {
       y: 22,
       squares: [[0, 1]],
