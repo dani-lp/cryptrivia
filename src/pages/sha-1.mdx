@@ -1,5 +1,6 @@
 import { Heading } from "@/components/Heading";
 import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
+import { HashComparer } from "@/components/sha1/HashComparer";
 
 export const description =
   "¿Cómo funciona el algoritmo de hashing SHA-1?";
@@ -7,6 +8,7 @@ export const description =
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
   { title: "Ruptura del algoritmo", id: "ruptura" },
+  { title: "Prueba el algoritmo", id: "prueba" },
 ];
 
 # SHA-1
@@ -102,3 +104,19 @@ tipos de ficheros o aplicaciones; cualquier aplicación que dependa de SHA-1 par
 firmas digitales, comprobación de integridad o identificación de ficheros es
 potencialmente vulnerable. SHA-1 dejó de utilizarse hace años en navegadores y muchas
 herramientas, pero sigue siendo utilizado en muchos sistemas y aplicaciones antiguos.
+
+---
+
+<Heading level={2} id="prueba">
+  Prueba el algoritmo
+</Heading>
+
+Aquí puedes probar el algoritmo de hashing SHA-1. Introduce una cadena de texto y verás
+cómo con un simple cambio, el hash resultante es completamente diferente.
+
+Recuerda: SHA-1 es un algoritmo en desuso, y no se recomienda su uso en aplicaciones
+modernas. Esta página se centra en explicar cómo funciona el algoritmo y sus
+vulnerabilidades. En caso de necesitar una función de hashing moderna, utiliza SHA-256 o
+similares.
+
+<HashComparer />
