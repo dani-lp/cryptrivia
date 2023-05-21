@@ -97,6 +97,16 @@ En esta sección, puedes probar el algoritmo de cifrado AES con el modo de opera
     ### 2.- Encripta tu mensaje
 
     Ahora que has generado una clave, puedes utilizarla para cifrar un mensaje.
+
+    Para poder llevar a cabo el proceso con la mayor transparencia posible, primero debes
+    introducir la clave a usar (que debe ser de 128 bits de longitud), y el mensaje.
+
+    Recibirás el texto encriptado, con el Vector de Inicialización (IV) utilizado. Debido
+    a la naturaleza aleatoria del IV, estos dos valores cambiarán cada vez que encriptes
+    el mensaje.
+
+    Para desencriptar el mensaje, debes usar la misma clave y el mismo IV que en el
+    proceso de encriptación.
   </Col>
   <Col>
     <AESEncrypt />
@@ -109,6 +119,9 @@ En esta sección, puedes probar el algoritmo de cifrado AES con el modo de opera
 
     Por último, puedes utilizar la misma clave para descifrar el mensaje que acabas de
     cifrar. ¡Asegúrate de que es la misma clave!
+
+    También debes introducir el Vector de Inicialización (IV) obtenido en el paso anterior
+    para que el algoritmo funcione correctamente. 
   </Col>
   <Col>
     <AESDecrypt />
