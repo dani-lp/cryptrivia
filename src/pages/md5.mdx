@@ -1,6 +1,7 @@
 import { Link } from "@/components/Link";
 import { Heading } from "@/components/Heading";
 import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
+import { HashComparer } from "@/components/hashing/HashComparer";
 
 export const description =
   "¿Cómo funciona el algoritmo de hashing MD5?";
@@ -8,6 +9,7 @@ export const description =
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
   { title: "Vulnerabilidades", id: "vulnerabilidades" },
+  { title: "Prueba el algoritmo", id: "prueba" },
 ];
 
 # MD5
@@ -73,3 +75,19 @@ En la práctica, ha habido varios ataques exitosos de colisión contra MD5. El e
 conocido es el malware **Flame**, que se aprovechó de una colisión en MD5 para falsificar
 un certificado de seguridad de Microsoft en 2012, permitiendo que el malware se hiciera
 pasar por una actualización de Windows. ¡Recordad no utilizar este algoritmo!
+
+---
+
+<Heading level={2} id="prueba">
+  Prueba el algoritmo
+</Heading>
+
+Aquí puedes probar el algoritmo de hashing SHA-1. Introduce una cadena de texto y verás
+cómo con un simple cambio, el hash resultante es completamente diferente.
+
+Recuerda: SHA-1 es un algoritmo en desuso, y no se recomienda su uso en aplicaciones
+modernas. Esta página se centra en explicar cómo funciona el algoritmo y sus
+vulnerabilidades. En caso de necesitar una función de hashing moderna, utiliza SHA-256 o
+similares.
+
+<HashComparer algorithm="MD5" />
