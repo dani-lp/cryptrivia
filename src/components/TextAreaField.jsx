@@ -2,7 +2,8 @@ import { classNames } from "@/utils";
 import { CopyButton } from "./CopyButton";
 
 export const TextAreaField = (props) => {
-  const { id, label, inputClassName, required, withCopy } = props;
+  const { id, label, inputClassName, required } = props;
+  const { withCopy, ...otherProps } = props;
 
   return (
     <div>
@@ -26,7 +27,7 @@ export const TextAreaField = (props) => {
             "disabled:cursor-not-allowed disabled:opacity-50",
             inputClassName
           )}
-          {...props}
+          {...otherProps}
         />
       </div>
     </div>

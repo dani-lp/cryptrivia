@@ -1,60 +1,118 @@
+import { Heading } from "@/components/Heading";
+import { GenKey } from "@/components/aes/GenKey";
+import { AESEncrypt } from "@/components/aes/AESEncrypt";
+import { AESDecrypt } from "@/components/aes/AESDecrypt";
+import { Test } from "@/components/aes/Test";
+
 export const description =
-  "In this guide, we will look at how to work with paginated responses when querying the Protocol API";
+  "En esta página, vamos a ver cómo funciona el algoritmo de cifrado AES.";
 
-# Pagination
+export const sections = [
+  { title: "¿Cómo funciona?", id: "funcionamiento" },
+  { title: "Modos de operación", id: "modos" },
+  { title: "Prueba el algoritmo", id: "prueba" },
+]
 
-In this guide, we will look at how to work with paginated responses when querying the Protocol API. By default, all responses limit results to ten. However, you can go as high as 100 by adding a `limit` parameter to your requests. If you are using one of the official Protocol API client libraries, you don't need to worry about pagination, as it's all being taken care of behind the scenes. {{ className: 'lead' }}
+# AES: Advanced Encryption Standard
+AES (Advanced Encryption Standard) es un algoritmo de cifrado ampliamente utilizado para
+proteger la información confidencial. Rijndael es el nombre original del algoritmo antes
+de ser adoptado como el estándar AES. {{ className: "lead" }}
 
-When an API response returns a list of objects, no matter the amount, pagination is supported. In paginated responses, objects are nested in a `data` attribute and have a `has_more` attribute that indicates whether you have reached the end of the last page. You can use the `starting_after` and `endding_before` query parameters to browse pages.
+<Heading level={2} id="funcionamiento">
+  ¿Cómo funciona?
+</Heading>
 
-## Example using cursors
+Para entender AES, podemos pensar en una caja fuerte con una combinación de cerradura. El
+mensaje que queremos proteger con AES es el contenido guardado dentro de la caja fuerte.
+
+Cuando aplicamos AES a un mensaje, el algoritmo lo divide en bloques más pequeños y los
+procesa de manera repetitiva. El proceso empieza con una "llave" o "clave", que sería el
+equivalente a la combinación de cerradura que sólo los destinatarios autorizados conocen.
+Esta clave se usa tanto para cifrar como para descifrar los mensajes.
+
+Durante el cifrado, AES/Rijndael realiza una serie de transformaciones matemáticas
+complejas en cada bloque del mensaje utilizando la clave. Estas transformaciones incluyen
+sustituciones, permutaciones y operaciones lógicas, todas diseñadas para hacer que el
+mensaje cifrado sea extremadamente difícil de descifrar sin la clave correcta. Hay varios
+modos de operación que se pueden utilizar para cifrar los mensajes, cada uno con sus
+propias ventajas y desventajas; puedes verlos en la sección de <a href="#modos">modos de operación</a>.
+
+El algoritmo AES es considerado muy seguro porque es resistente a ataques de fuerza bruta,
+es decir, intentos de descifrar un mensaje probando todas las posibles combinaciones de
+clave. Además, es eficiente en cuando a rendimiento, lo que ha hecho que se convierta en
+el estándar más ampliamente acepatdo para el cifrado de datos en distintas aplicaciones.
+
+<Heading level={2} id="modos">
+  Modos de operación
+</Heading>
+
+AES puede ser utilizado con distintos modos de operación. Éstos determinan cómo se aplica
+el proceso de cifrado y descifrado a los bloques de datos. ¡Vamos a ver los más comunes!
+
+1. **ECB (Electronic Codebook)** es el modo ECB es el más simple de todos. En este modo,
+cada bloque de datos se cifra por separado utilizando la misma clave. Esto significa que
+si dos bloques de datos idénticos se cifran con la misma clave, el resultado será el
+mismo. Esto puede ser un problema, ya que un atacante podría deducir información sobre el
+mensaje original al comparar los bloques cifrados.
+
+2. **CBC (Cipher Block Chaining)** es un modo de operación más seguro que ECB. En este
+modo, los bloques son vinculados entre sí; de esta forma, cada bloque de texto plano o
+_plaintext_ se combina mediante una operación XOR con el bloque de texto cifrado o
+_ciphertext_ anterior, antes de ser cifrado. Gracias a este proceso, ¡incluso bloques de
+texto plano idénticos producen texto cifrado diferente! Además, se utiliza un **vector de
+inicialización** (IV) para proporcionar aleatoriedad al primer bloque de texto plano.
+
+3. **CTR (Counter)** es un modo que permite realizar el cifardo en paralelo. En este modo,
+se utiliza un contador para generar un flujo de bits aleatorios que se combinan con el
+texto plano mediante una operación XOR. Esto significa que cada bloque de texto plano se
+cifra de forma independiente, con una clave distinta. El proceso vuelve el algoritmo muy
+eficiente, pero conlleva un mayor coste, ya que debemos asegurarnos de no reusar los
+valores del contador y las claves, para evitar un ataque.
+
+---
+
+<Heading level={2} id="prueba">
+  Prueba el algoritmo
+</Heading>
+
+En esta sección, puedes probar el algoritmo de cifrado AES con el modo de operación CBC.
+
+<Row className="mb-16">
+  <Col>
+    ### 1.- Genera una clave
+
+    El primer paso para utilizar AES es generar una clave. Puedes hacerlo con el botón
+    de la derecha; usaremos claves de 128 bits.
+
+    Una vez generes una clave, recuerda que debes usar la misma para cifrar y descifrar
+    el mensaje.
+  </Col>
+  <Col>
+    <GenKey />
+  </Col>
+</Row>
+
+<Row className="mb-16">
+  <Col>
+    ### 2.- Encripta tu mensaje
+
+    Ahora que has generado una clave, puedes utilizarla para cifrar un mensaje.
+  </Col>
+  <Col>
+    <AESEncrypt />
+  </Col>
+</Row>
 
 <Row>
   <Col>
+    ### 3.- Desencripta tu mensaje
 
-    In this example, we request the page that starts after the conversation with id `s4WycXedwhQrEFuM`. As a result, we get a list of three conversations and can tell by the `has_more` attribute that we have reached the end of the resultset.
-
-    <Properties>
-      <Property name="starting_after" type="string">
-        The last ID on the page you're currently on when you want to fetch the next page.
-      </Property>
-      <Property name="ending_before" type="string">
-        The first ID on the page you're currently on when you want to fetch the previous page.
-      </Property>
-      <Property name="limit" type="integer">
-        Limit the number of items returned.
-      </Property>
-    </Properties>
-
+    Por último, puedes utilizar la misma clave para descifrar el mensaje que acabas de
+    cifrar. ¡Asegúrate de que es la misma clave!
   </Col>
   <Col>
-
-    ```bash {{ title: 'Manual pagination using cURL' }}
-    curl -G https://api.protocol.chat/v1/conversations \
-      -H "Authorization: Bearer {token}" \
-      -d starting_after="s4WycXedwhQrEFuM" \
-      -d limit=10
-    ```
-
-    ```json {{ title: 'Paginated response' }}
-    {
-      "has_more": false,
-      "data": [
-        {
-          "id": "WAz8eIbvDR60rouK",
-          // ...
-        },
-        {
-          "id": "hSIhXBhNe8X1d8Et"
-          // ...
-        },
-        {
-          "id": "fbwYwpi9C2ybt6Yb"
-          // ...
-        }
-      ]
-    }
-    ```
-
+    <AESDecrypt />
   </Col>
 </Row>
+
+<Test />
