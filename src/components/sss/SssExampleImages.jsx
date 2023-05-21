@@ -13,7 +13,7 @@ export const SssExampleImages = ({ index }) => {
       alt: "",
       width: 500,
       height: 500,
-    }
+    },
   };
 
   return (

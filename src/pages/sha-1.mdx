@@ -2,8 +2,7 @@ import { Heading } from "@/components/Heading";
 import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
 import { HashComparer } from "@/components/hashing/HashComparer";
 
-export const description =
-  "¿Cómo funciona el algoritmo de hashing SHA-1?";
+export const description = "¿Cómo funciona el algoritmo de hashing SHA-1?";
 
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
@@ -12,15 +11,16 @@ export const sections = [
 ];
 
 # SHA-1
+
 SHA-1 (o Secure Hash Algorithm 1) es un algoritmo criptográfico que se utiliza para
 convertir datos en un código (en teoría) único y representativo llamado **hash**, de forma
 similar a una huella digital de los datos. {{ className: 'lead' }}
 
 <Note>
-  SHA-1 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en aplicaciones
-  modernas, ya que es vulnerable a ataques de colisión. Esta página se centra en explicar
-  cómo funciona el algoritmo y sus vulnerabilidades. En caso de necesitar una función de
-  hashing moderna, recomendamos usar SHA-256.
+  SHA-1 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en
+  aplicaciones modernas, ya que es vulnerable a ataques de colisión. Esta página
+  se centra en explicar cómo funciona el algoritmo y sus vulnerabilidades. En
+  caso de necesitar una función de hashing moderna, recomendamos usar SHA-256.
 </Note>
 
 <Heading level={2} id="funcionamiento">
@@ -67,27 +67,31 @@ alterar un input sin modificar su hash. Este tipo de ataque se conoce como ataqu
 
 Google publicó en 2017 un ataque de colisión para SHA-1, que consiste en crear dos
 archivos PDF con el mismo hash. Para los detalles técnicos, puedes leer el artículo en
-el que se publicó el ataque: 
-<a href="https://shattered.io/static/shattered.pdf" target="_blank">"The first collision for full SHA-1"</a>
+el que se publicó el ataque:
+
+<a href="https://shattered.io/static/shattered.pdf" target="_blank">
+  "The first collision for full SHA-1"
+</a>
 
 El proceso de ruptura es el siguiente:
 
 1. Se eligen cuidadosamente dos archivos PDF diferentes con estructuras y contenidos
-similares pero nombres y datos diferentes.
+   similares pero nombres y datos diferentes.
 2. Se generan colisiones, utilizando una técnica llamada "ataque de colisión de prefijo
-elegido". Consiste en manipular los archivos PDF añadiendo estructuras de datos
-específicas que hacen que los dos archivos tengan el mismo hash SHA-1. Las estructuras
-añadidas aprovechan debilidades en el algoritmo SHA-1.
+   elegido". Consiste en manipular los archivos PDF añadiendo estructuras de datos
+   específicas que hacen que los dos archivos tengan el mismo hash SHA-1. Las estructuras
+   añadidas aprovechan debilidades en el algoritmo SHA-1.
 3. Se verifica el ataque, creando un certificado digital utilizando uno de los archivos
-PDF. Este certificado es una forma de demostrar que el archivo es legítimo y no ha sido
-manipulado. Mediante el uso de la técnica de colisión, se logra aplicar el mismo
-certificado al otro archivo PDF sin generar advertencias o errores, ya que ambos tienen
-el mismo hash SHA-1.
+   PDF. Este certificado es una forma de demostrar que el archivo es legítimo y no ha sido
+   manipulado. Mediante el uso de la técnica de colisión, se logra aplicar el mismo
+   certificado al otro archivo PDF sin generar advertencias o errores, ya que ambos tienen
+   el mismo hash SHA-1.
 4. Se utiliza el PDF falso para crear un archivo malicioso que aparenta ser inofensivo,
-pero tiene el mismo hash que un archivo legítimo. Esta técnica permite engañar a usuarios
-para que abran un archivo malicioso pensando que es seguro.
+   pero tiene el mismo hash que un archivo legítimo. Esta técnica permite engañar a usuarios
+   para que abran un archivo malicioso pensando que es seguro.
 
 ### Consideraciones
+
 Desgraciadamente, no podemos replicar el ataque de colisión de Google en esta página, ya
 que requiere de un gran poder de cómputo y de una gran cantidad de tiempo (¡el ataque
 original necesitó computar `9,223,372,036,854,775,808` hashes, necesitando el equivalente

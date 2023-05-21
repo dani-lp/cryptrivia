@@ -26,7 +26,13 @@ partes: una clave pública y una clave privada. La clave pública se utiliza par
 mensajes y la clave privada se utiliza para descifrarlos.
 
 La idea general del criptosistema es utilizar la
-<a href="https://es.wikipedia.org/wiki/Teor%C3%ADa_de_c%C3%B3digos" target="_blank">teoría de códigos</a>
+
+<a
+  href="https://es.wikipedia.org/wiki/Teor%C3%ADa_de_c%C3%B3digos"
+  target="_blank"
+>
+  teoría de códigos
+</a>
 para cifrar y descrifrar mensajes de forma segura. En lugar de basarse en operaciones
 matemáticas complejas, como hacen otros criptosistemas populares, utiliza la complejidad
 de los códigos lineales, y usa randomización en el proceso de encriptado.
@@ -53,7 +59,8 @@ se utilizan para generar las claves y para cifrar y descifrar mensajes.
 Ahora, veamos como generar las claves. Usaremos de ejemplo a Alice, que quiere enviar un
 mensaje a Bob.
 
-### Generación de claves {{ anchor: false }}
+### Generación de claves
+
 Lo primero que debe hacer Alice es elegir un **código lineal** `C` de alguna familia de códigos
 para el cual conoce un **algoritmo eficiente de decodificación** `A`. A continuación, debe hacer
 público el código `C`, pero mantener el algoritmo de decodificación en secreto. El algoritmo
@@ -68,7 +75,8 @@ siguiendo la fórmula `Ĝ = SGP`.
 Con todos los cálculos realizados, Alice puede obtener sus claves. Su clave pública será
 la tupla `(Ĝ, t)`, y su clave privada será la tupla `(S, P, A)`.
 
-### Cifrado {{ anchor: false }}
+### Cifrado
+
 Imaginemos que Bob quiere enviar un mensaje `m` a Alice. Recordemos que la clave pública de
 Alice es la tupla `(Ĝ, t)`. Primero, Bob debe codificar el mensaje `m` como un _string_
 binario de longitud `k`, y luego computar el vector `c' = mĜ`. Después, debe generar un
@@ -77,7 +85,8 @@ Finalmente, podrá computar el mensaje cifrado `c` como `c = c' + z`.
 
 Ahora que Bob tiene el mensaje cifrado `c`, puede enviárselo a Alice.
 
-### Descifrado {{ anchor: false }}
+### Descifrado
+
 Cuando Alice recibe el mensaje cifrado `c`, puede descifrarlo usando su clave privada.
 Para ello, debe primero computar la matriz inversa de `P`, `P⁻¹`. A continuación, debe
 también computar `ĉ = cP⁻¹`. Una vez hecho esto, puede usar su algoritmo de decodificación
@@ -103,7 +112,8 @@ utilizaremos la librería `mceliece`. Éstas librerías pueden ser instaladas co
 comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivamente.
 
 <Note>
-  Nota: para poder usar la versión de Rust, la librería `rand` debe estar instalada.
+  Nota: para poder usar la versión de Rust, la librería `rand` debe estar
+  instalada.
 </Note>
 
 <Row className="mb-16">
@@ -112,6 +122,7 @@ comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivame
 
     Alice genera una clave pública y una clave privada. La clave privada tendrá que
     guardarla a buen recaudo, pero la calve pública la puede compartir con Bob. {{ className: 'lead'}}
+
   </Col>
 
   <Col>
@@ -120,7 +131,7 @@ comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivame
     ```rust
     // Generación de claves probabilística
     let mut rng = rand::thread_rng(); // número aleatorio
-    let (public_key, secret_key) = keypair_boxed(&mut rng); 
+    let (public_key, secret_key) = keypair_boxed(&mut rng);
     ```
 
     ```typescript
@@ -140,6 +151,7 @@ comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivame
     Una vez Bob recibe la clave pública de Alice, puede computar una clave secreta. A su
     vez, también computará un _ciphertext_ o texto cifrado que podrá enviar a Alice, para
     que ella pueda generar su propio secreto sin necesidad de enviarlo por la red. {{ className: 'lead'}}
+
   </Col>
 
   <Col>
@@ -164,10 +176,10 @@ comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivame
     ### 3.- Alice recrea la clave secreta
 
     Una vez Alice recibe el _ciphertext_ de Bob, puede recrear el secreto que Bo ha
-    computado. Para ello, utiliza su clave privada y el _ciphertext_ de Bob. Esto es 
+    computado. Para ello, utiliza su clave privada y el _ciphertext_ de Bob. Esto es
     posible gracias a que la clave privada inicial de Alice ha sido usada para generar la
     clave pública, que a su vez ha sido usada para generar el secreto compartido. {{ className: 'lead'}}
-  
+
   </Col>
 
   <Col>
@@ -188,7 +200,7 @@ comandos `cargo add classic-mceliece-rust` y `npm install mceliece` respectivame
   </Col>
 </Row>
 
-### Ejecución: ¡bajo tu propia responsabilidad! {{ anchor: false }}
+### Ejecución: ¡bajo tu propia responsabilidad!
 
 El tiempo de ejecución de este algoritmo es muy lento. Puedes realizar una prueba bajo tu
 propia responsabilidad, pero ten en cuenta que tu navegador puede bloquearse durante unos
@@ -201,7 +213,7 @@ el resultado.
 
 <KeyGen />
 
---- 
+---
 
 <Heading level={2} id="revisa">
   Revisa tu aprendizaje

@@ -1,17 +1,17 @@
 const sizes = {
-  sm: 'h-4 w-4',
-  md: 'h-8 w-8',
-  lg: 'h-16 w-16',
-  xl: 'h-24 w-24',
+  sm: "h-4 w-4",
+  md: "h-8 w-8",
+  lg: "h-16 w-16",
+  xl: "h-24 w-24",
 };
 
 const variants = {
-  light: 'text-white',
-  primary: 'text-emerald-500',
-  dark: 'text-black',
+  light: "text-white",
+  primary: "text-emerald-500",
+  dark: "text-black",
 };
 
-export const Spinner = ({ size = 'md', variant = 'primary' }) => {
+export const Spinner = ({ size = "md", variant = "primary" }) => {
   return (
     <>
       <svg

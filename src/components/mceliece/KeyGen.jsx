@@ -37,9 +37,12 @@ export const KeyGen = () => {
 
     setLoading(false);
     setHasConfirmed(false);
-    console.log('Secreto compartido: es el mismo', { secret_bob, secret_alice });
-    console.log('Claves iniciales', { public_key, private_key });
-    console.log('Ciphertext enviado por Bob', {  cyphertext });
+    console.log("Secreto compartido: es el mismo", {
+      secret_bob,
+      secret_alice,
+    });
+    console.log("Claves iniciales", { public_key, private_key });
+    console.log("Ciphertext enviado por Bob", { cyphertext });
   };
 
   const buttonContent = loading

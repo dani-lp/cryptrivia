@@ -6,7 +6,12 @@ import { Heading } from "@/components/Heading";
 import { ChatBubbleIcon } from "@/components/icons/ChatBubbleIcon";
 import { EnvelopeIcon } from "@/components/icons/EnvelopeIcon";
 import { UsersIcon } from "@/components/icons/UsersIcon";
-import { ArrowsRightLeftIcon, HashtagIcon, KeyIcon, UserGroupIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowsRightLeftIcon,
+  HashtagIcon,
+  KeyIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 
 const resources = [
   {

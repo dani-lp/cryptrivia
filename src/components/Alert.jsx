@@ -47,7 +47,12 @@ export const Alert = ({ content, shown, className }) => {
       );
     case "error":
       return (
-        <div className={classNames("rounded-md bg-red-50 dark:bg-red-950 p-4", className)}>
+        <div
+          className={classNames(
+            "rounded-md bg-red-50 p-4 dark:bg-red-950",
+            className
+          )}
+        >
           <div className="flex">
             <div className="shrink-0">
               <XCircleIcon
@@ -74,7 +79,12 @@ export const Alert = ({ content, shown, className }) => {
       );
     case "success":
       return (
-        <div className={classNames("rounded-md bg-emerald-50 dark:bg-emerald-950 p-4", className)}>
+        <div
+          className={classNames(
+            "rounded-md bg-emerald-50 p-4 dark:bg-emerald-950",
+            className
+          )}
+        >
           <div className="flex">
             <div className="shrink-0">
               <CheckCircleIcon

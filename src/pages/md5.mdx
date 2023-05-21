@@ -3,8 +3,7 @@ import { Heading } from "@/components/Heading";
 import { HashingExampleImages } from "@/components/hashing/HashingExampleImages";
 import { HashComparer } from "@/components/hashing/HashComparer";
 
-export const description =
-  "¿Cómo funciona el algoritmo de hashing MD5?";
+export const description = "¿Cómo funciona el algoritmo de hashing MD5?";
 
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
@@ -13,15 +12,16 @@ export const sections = [
 ];
 
 # MD5
+
 MD5 (o Message-Digest Algorithm 5) es un algoritmo criptográfico que se utiliza para
 convertir datos en un código (en teoría) único y representativo llamado **hash**, de forma
 similar a una huella digital de los datos. {{ className: 'lead' }}
 
 <Note>
-  MD5 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en aplicaciones
-  modernas, ya que es vulnerable a ataques de colisión. Esta página se centra en explicar
-  cómo funciona el algoritmo y sus vulnerabilidades. En caso de necesitar una función de
-  hashing moderna, recomendamos usar SHA-256.
+  MD5 es un algoritmo en desuso; debemos tener cuidado de no utilizarlo en
+  aplicaciones modernas, ya que es vulnerable a ataques de colisión. Esta página
+  se centra en explicar cómo funciona el algoritmo y sus vulnerabilidades. En
+  caso de necesitar una función de hashing moderna, recomendamos usar SHA-256.
 </Note>
 
 <Heading level={2} id="funcionamiento">
@@ -53,8 +53,9 @@ muy común en la actualidad. Por ello, is importante conocer sus vulnerabilidade
 MD5 tiene varias vulnerabilidades clave. La más importante es que es vulnerable a los
 ataques de colisión, lo que significa que es posible encontrar dos conjuntos de datos
 diferentes que produzcan el mismo hash. Este problema es similar a los encontrados en
-<Link href="/sha-1#ruptura">SHA-1</Link>, permitiendo abusar de certificados de seguridad, 
-o Sistemas de Gestión de Contenidos (CMS).
+
+<Link href="/sha-1#ruptura">SHA-1</Link>, permitiendo abusar de certificados de
+seguridad, o Sistemas de Gestión de Contenidos (CMS).
 
 Otra vulnerabilidad en común con SHA-1 es que es más vulnerable a los ataques de fuerza
 bruta que algoritmos modernos. Por ejemplo, la antigua GPU NVIDIA GeForce 8800 Ultra,

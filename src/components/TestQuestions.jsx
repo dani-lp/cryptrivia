@@ -44,7 +44,9 @@ const Answers = ({ answers, selected, setSelected }) => {
                   <RadioGroup.Label
                     as="span"
                     className={classNames(
-                      checked ? "text-emerald-900 dark:text-emerald-200" : "text-gray-900 dark:text-white",
+                      checked
+                        ? "text-emerald-900 dark:text-emerald-200"
+                        : "text-gray-900 dark:text-white",
                       "block text-sm font-medium"
                     )}
                   >
@@ -75,7 +77,7 @@ const QuestionContainer = ({ question }) => {
   const handleSetSelected = (newValue) => {
     setSelected(newValue);
     setResultCorrect(null);
-  }
+  };
 
   const alertContent =
     resultCorrect === true
@@ -91,7 +93,7 @@ const QuestionContainer = ({ question }) => {
 
   return (
     <div className="relative col-span-1 flex flex-col rounded-lg border border-gray-200 p-4 dark:border-zinc-700">
-      <h3 className="m-0 mb-2 border-b border-gray-200 pb-2 min-h-[70px]">
+      <h3 className="m-0 mb-2 min-h-[70px] border-b border-gray-200 pb-2">
         {question.title}
       </h3>
 
@@ -124,7 +126,7 @@ export const TestQuestions = ({ questions }) => {
   return (
     <div className="grid grid-cols-1 gap-4 xl:max-w-none xl:grid-cols-2">
       {questions.map((question) => (
-        <QuestionContainer key={question} question={question} />
+        <QuestionContainer key={question.title} question={question} />
       ))}
     </div>
   );

@@ -32,8 +32,7 @@ const questions = [
     correctAnswerKey: "3",
   },
   {
-    title:
-      "¿En qué área de las matemáticas se basa el algoritmo de Shamir?",
+    title: "¿En qué área de las matemáticas se basa el algoritmo de Shamir?",
     answers: {
       1: "Teoría de grafos",
       2: "Teoría de polinomios",

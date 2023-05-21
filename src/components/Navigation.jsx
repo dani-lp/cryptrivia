@@ -202,7 +202,10 @@ export const navigation = [
   {
     title: "Aprende",
     links: [
-      { title: "Identity-based Cryptography", href: "/identity-based-cryptography" },
+      {
+        title: "Identity-based Cryptography",
+        href: "/identity-based-cryptography",
+      },
       { title: "AES/Rijndael", href: "/aes" },
     ],
   },

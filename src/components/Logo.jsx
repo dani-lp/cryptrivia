@@ -8,7 +8,9 @@ export function Logo(props) {
   return (
     <div className="flex items-center gap-2">
       <AcademicCapIcon className="h-6 w-6 text-emerald-400" />
-      <h1 className={classNames("font-bold text-zinc-900", montserrat.className)}>
+      <h1
+        className={classNames("font-bold text-zinc-900", montserrat.className)}
+      >
         Cryptrivia
       </h1>
     </div>

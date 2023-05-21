@@ -87,7 +87,7 @@ export const ShamirInputCalculator = () => {
             name="secreto"
             label="Secreto"
             placeholder="Escribe tu secreto..."
-            inputClassName="mb-4"
+            className="mb-4"
             disabled={loading}
             required
           />

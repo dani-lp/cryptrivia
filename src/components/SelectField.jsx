@@ -21,7 +21,7 @@ export const SelectField = ({
           <div className="relative mt-1">
             <Listbox.Button
               className={classNames(
-                "relative w-full cursor-default rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:text-sm sm:leading-6",
+                "relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-zinc-900 dark:text-white dark:ring-zinc-600 sm:text-sm sm:leading-6",
                 className
               )}
               disabled={disabled}
@@ -42,13 +42,15 @@ export const SelectField = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-600 ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-900 dark:ring-zinc-600 sm:text-sm">
                 {values.map((value) => (
                   <Listbox.Option
                     key={value.id}
                     className={({ active }) =>
                       classNames(
-                        active ? "bg-emerald-500 text-white" : "text-gray-900 dark:text-white",
+                        active
+                          ? "bg-emerald-500 text-white"
+                          : "text-gray-900 dark:text-white",
                         "relative cursor-default select-none py-2 pl-3 pr-9"
                       )
                     }

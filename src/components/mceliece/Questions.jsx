@@ -22,7 +22,8 @@ const questions = [
     correctAnswerKey: "3",
   },
   {
-    title: "¿Cuál es la clave que se mantiene en secreto en el criptosistema McEliece?",
+    title:
+      "¿Cuál es la clave que se mantiene en secreto en el criptosistema McEliece?",
     answers: {
       1: "La clave pública.",
       2: "La matriz generadora G.",

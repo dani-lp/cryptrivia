@@ -10,9 +10,10 @@ export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
   { title: "Modos de operación", id: "modos" },
   { title: "Prueba el algoritmo", id: "prueba" },
-]
+];
 
 # AES: Advanced Encryption Standard
+
 AES (Advanced Encryption Standard) es un algoritmo de cifrado ampliamente utilizado para
 proteger la información confidencial. Rijndael es el nombre original del algoritmo antes
 de ser adoptado como el estándar AES. {{ className: "lead" }}
@@ -49,24 +50,24 @@ AES puede ser utilizado con distintos modos de operación. Éstos determinan có
 el proceso de cifrado y descifrado a los bloques de datos. ¡Vamos a ver los más comunes!
 
 1. **ECB (Electronic Codebook)** es el modo ECB es el más simple de todos. En este modo,
-cada bloque de datos se cifra por separado utilizando la misma clave. Esto significa que
-si dos bloques de datos idénticos se cifran con la misma clave, el resultado será el
-mismo. Esto puede ser un problema, ya que un atacante podría deducir información sobre el
-mensaje original al comparar los bloques cifrados.
+   cada bloque de datos se cifra por separado utilizando la misma clave. Esto significa que
+   si dos bloques de datos idénticos se cifran con la misma clave, el resultado será el
+   mismo. Esto puede ser un problema, ya que un atacante podría deducir información sobre el
+   mensaje original al comparar los bloques cifrados.
 
 2. **CBC (Cipher Block Chaining)** es un modo de operación más seguro que ECB. En este
-modo, los bloques son vinculados entre sí; de esta forma, cada bloque de texto plano o
-_plaintext_ se combina mediante una operación XOR con el bloque de texto cifrado o
-_ciphertext_ anterior, antes de ser cifrado. Gracias a este proceso, ¡incluso bloques de
-texto plano idénticos producen texto cifrado diferente! Además, se utiliza un **vector de
-inicialización** (IV) para proporcionar aleatoriedad al primer bloque de texto plano.
+   modo, los bloques son vinculados entre sí; de esta forma, cada bloque de texto plano o
+   _plaintext_ se combina mediante una operación XOR con el bloque de texto cifrado o
+   _ciphertext_ anterior, antes de ser cifrado. Gracias a este proceso, ¡incluso bloques de
+   texto plano idénticos producen texto cifrado diferente! Además, se utiliza un **vector de
+   inicialización** (IV) para proporcionar aleatoriedad al primer bloque de texto plano.
 
 3. **CTR (Counter)** es un modo que permite realizar el cifardo en paralelo. En este modo,
-se utiliza un contador para generar un flujo de bits aleatorios que se combinan con el
-texto plano mediante una operación XOR. Esto significa que cada bloque de texto plano se
-cifra de forma independiente, con una clave distinta. El proceso vuelve el algoritmo muy
-eficiente, pero conlleva un mayor coste, ya que debemos asegurarnos de no reusar los
-valores del contador y las claves, para evitar un ataque.
+   se utiliza un contador para generar un flujo de bits aleatorios que se combinan con el
+   texto plano mediante una operación XOR. Esto significa que cada bloque de texto plano se
+   cifra de forma independiente, con una clave distinta. El proceso vuelve el algoritmo muy
+   eficiente, pero conlleva un mayor coste, ya que debemos asegurarnos de no reusar los
+   valores del contador y las claves, para evitar un ataque.
 
 ---
 
@@ -85,6 +86,7 @@ En esta sección, puedes probar el algoritmo de cifrado AES con el modo de opera
 
     Una vez generes una clave, recuerda que debes usar la misma para cifrar y descifrar
     el mensaje.
+
   </Col>
   <Col>
     <GenKey />
@@ -106,6 +108,7 @@ En esta sección, puedes probar el algoritmo de cifrado AES con el modo de opera
 
     Para desencriptar el mensaje, debes usar la misma clave y el mismo IV que en el
     proceso de encriptación.
+
   </Col>
   <Col>
     <AESEncrypt />
@@ -120,7 +123,8 @@ En esta sección, puedes probar el algoritmo de cifrado AES con el modo de opera
     cifrar. ¡Asegúrate de que es la misma clave!
 
     También debes introducir el Vector de Inicialización (IV) obtenido en el paso anterior
-    para que el algoritmo funcione correctamente. 
+    para que el algoritmo funcione correctamente.
+
   </Col>
   <Col>
     <AESDecrypt />

@@ -1,8 +1,7 @@
 import { Heading } from "@/components/Heading";
 import { RSAKeyGen } from "@/components/RSAKeyGen";
 
-export const description =
-  "¿Cómo funciona el algoritmo de hashing SHA-1?";
+export const description = "¿Cómo funciona el algoritmo de hashing SHA-1?";
 
 export const sections = [
   { title: "¿Cómo funciona?", id: "funcionamiento" },
@@ -11,6 +10,7 @@ export const sections = [
 ];
 
 # RSA
+
 RSA es uno de los algoritmos de criptografía asimétrica más utilizados en la actualidad.
 Permite la creación de claves públicas y privadas, que se utilizan para cifrar y descifrar
 información. {{ className: 'lead' }}
@@ -48,6 +48,7 @@ valores de `p`, `q` y `λ(n)` deben ser descartados, ya que pueden ser usados pa
 `d` fácilmente.
 
 ### Distribución de claves, encriptación y desencriptación
+
 La distribución es muy simple: basta con publicar la clave pública `(n, e)` en algún lugar
 público. Cualquiera que quiera enviarnos un mensaje puede utilizar esta clave para
 encriptarlo.
@@ -86,15 +87,17 @@ Por ejemplo, podemos ver cómo generar las claves en Linux usando el comando `op
   # Generamos la clave privada
   openssl genrsa -out private.pem 2048
 
-  # Generamos la clave pública, en base a la clave privada ya generada
-  openssl rsa -in private.pem -outform PEM -pubout -out public.pem
-  ```
+# Generamos la clave pública, en base a la clave privada ya generada
+
+openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+
+````
 </CodeGroup>
 
 ---
 
 <Heading level={2} id="ruptura">
-  Ruptura del algoritmo
+Ruptura del algoritmo
 </Heading>
 
 Vamos a ver un ejemplo donde los números primos utilizados para generar las claves son
@@ -128,23 +131,23 @@ además de `d`. Todo este proceso es fácil de hacer con un lenguaje de programa
 podemos ver a continuación, donde usamos Python:
 
 <CodeGroup title="" tag="GET" label="/v1/messages">
-  ```python {{ title: 'Python' }}
-  # para usar esta librería, instalarla con 'pip install pycryptodome'
-  from Crypto.Util.number import inverse, long_to_bytes
+```python {{ title: 'Python' }}
+# para usar esta librería, instalarla con 'pip install pycryptodome'
+from Crypto.Util.number import inverse, long_to_bytes
 
-  c = 843044897663847841476319711639772861390329326681532977209935413827620909782846667
-  n = 1422450808944701344261903748621562998784243662042303391362692043823716783771691667
-  e = 65537
-  p = 2159947535959146091116171018558446546179
-  q = 658558036833541874645521278345168572231473
+c = 843044897663847841476319711639772861390329326681532977209935413827620909782846667
+n = 1422450808944701344261903748621562998784243662042303391362692043823716783771691667
+e = 65537
+p = 2159947535959146091116171018558446546179
+q = 658558036833541874645521278345168572231473
 
-  phi = (p-1)*(q-1)
+phi = (p-1)*(q-1)
 
-  d = inverse(e, phi)
+d = inverse(e, phi)
 
-  m = pow(c,d,n)
+m = pow(c,d,n)
 
-  print(long_to_bytes(m))
-  ```
+print(long_to_bytes(m))
+````
+
 </CodeGroup>
-
