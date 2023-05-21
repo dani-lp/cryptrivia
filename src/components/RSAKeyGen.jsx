@@ -5,8 +5,8 @@ import { Button } from "./Button";
 
 export const RSAKeyGen = () => {
   const [loading, setLoading] = React.useState(false);
-  const [publicKey, setPublicKey] = React.useState(null);
-  const [privateKey, setPrivateKey] = React.useState(null);
+  const [publicKey, setPublicKey] = React.useState("");
+  const [privateKey, setPrivateKey] = React.useState("");
 
   const generateKeypair = React.useCallback(async () => {
     return new Promise((resolve, reject) => {
