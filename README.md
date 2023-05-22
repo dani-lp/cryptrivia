@@ -12,3 +12,14 @@ La lista de algoritmos es la siguiente:
 - MD5
 - RSA
 - Identity-based Cryptography
+
+### Ejecución
+La plataforma está disponible en https://cryptrivia.vercel.app/.
+
+Para ejecutar en local, con Node.js v18 y NPM instalado, ejecutar los siguientes comandos:
+```bash
+npm install
+npm run dev
+```
+
+La página estará disponible en http://localhost:3000.
