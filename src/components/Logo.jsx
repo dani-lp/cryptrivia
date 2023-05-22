@@ -9,7 +9,7 @@ export function Logo(props) {
     <div className="flex items-center gap-2">
       <AcademicCapIcon className="h-6 w-6 text-emerald-400" />
       <h1
-        className={classNames("font-bold text-zinc-900", montserrat.className)}
+        className={classNames("font-bold text-zinc-900 dark:text-white", montserrat.className)}
       >
         Cryptrivia
       </h1>
